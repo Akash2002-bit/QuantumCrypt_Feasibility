@@ -33,3 +33,61 @@ source quantum_env/bin/activate  # On Windows use: quantum_env\Scripts\activate
 
 # Install dependencies
 pip install qiskit==2.4.0 qiskit-aer==0.17.2 matplotlib numpy
+```
+
+## ⚙️ Usage & Reproducibility
+
+To execute the simulations and generate the output data and figures, run the main script from your terminal:
+
+```bash
+python quantum_sim.py
+```
+
+### Reproducibility Note
+The script uses a fixed random seed (`SEED = 42`) for both the transpiler (`seed_transpiler`) and the noisy simulator (`seed_simulator`). Combined with `SHOTS = 1024`, running this script will produce the **exact numerical results** and confidence intervals reported in Table II of the paper.
+
+## 📊 Expected Outputs
+
+The script runs in a few minutes on a standard laptop and produces two types of outputs:
+
+### 1. Console Reporting
+The script will print detailed tables directly to your terminal. These include:
+* **Shor's Algorithm Results:** Circuit depths and success probabilities ($p_s$) under Ideal, Model A, and Model B conditions.
+* **Grover's Algorithm Results:** Success probabilities mapped against theoretically optimal iterations ($k^*$).
+* **Fidelity Decay Summary:** A side-by-side comparison of empirical results vs. theoretical decay envelopes $(1-\varepsilon)^d$.
+* **Impossibility Gap Analysis:** A step-by-step numerical breakdown bridging the empirical NISQ depth collapse ($d^* \approx 10^3$) to cryptanalytic requirements (e.g., $10^{14}$ for RSA-2048).
+
+### 2. High-Resolution Visual Artifacts
+The script automatically generates and saves three publication-ready plots to the current directory:
+* `shor_histogram.png`: Empirical success probability vs. depth for Shor's algorithm.
+* `grover_scaling.png`: Empirical success probability vs. depth for Grover's algorithm.
+* `noise_comparison.png`: A side-by-side fidelity decay overlay proving that Model B (composite thermal noise) degrades faster than standard depolarising benchmarks.
+
+## 📖 Citation
+
+If you use this code in your own work or wish to cite the accompanying systematization of knowledge, please use the following citation (update with actual publication details once available):
+
+```bibtex
+@inproceedings{angom2026fromtheory,
+  title={From Theory to Hardware Reality: A Systematization of Quantum Cryptanalysis Feasibility},
+  author={Angom, Akash and Bhattacharjee, Arup and Singh, Laiphrakpam Dolendro},
+  booktitle={Proceedings of the [Conference/Workshop Name]},
+  year={2026}
+}
+```
+
+## ⚖️ License
+This project is licensed under the MIT License - see the LICENSE file for details.
+```
+
+***
+
+### 📄 `requirements.txt`
+If you are adding a `requirements.txt` file to your repository alongside the README, here is the updated version matching your exact system environment:
+
+```text
+qiskit==2.4.0
+qiskit-aer==0.17.2
+matplotlib>=3.10.8
+numpy>=2.4.4
+```
